@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+  <div class="formato">
+    {% if request.user.is_authenticated %}
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6"><h1>Welcome, You are logged in</h1></div>
+      <div class="col-lg-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <p class="lead">Step 1:</p>
+      </div>
+      <div class="col-lg-8">
+        <a class="btn btn-info" href="{% url 'patient:create_profile' %}">Create Profile</a>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <p class="lead">Step 2:</p>
+      </div>
+      <div class="col-lg-8">
+        <a class="btn btn-info" href="{% url 'patient:book_appointment' %}">Book Appointment</a>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <p class="lead">Step 3:</p>
+      </div>
+      <div class="col-lg-8">
+        <a class="btn btn-primary" href="{% url 'patient:view_appointments' %}">View Appointment</a>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <br>
+    <form action="{% url 'patient:logout_view' %}">
+      {% csrf_token %}
+      <button class="btn btn-lg btn-danger btn-block">Logout</button>
+    </form>
+    {% else %}
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6"><h1>Please <a class="btn btn-primary" href="{% url 'patient:login_view' %}">Login</a> or <a class="btn btn-primary" href="{% url 'patient:signup_view' %}">Signup</a></h1></div>
+      <div class="col-lg-3"></div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endblock content %}

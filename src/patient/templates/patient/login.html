@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+{% block content %}
+<div class="container">
+	<div class="formato">
+    	<div class="row">
+      		<div class="col-lg-2"></div>
+      		<div class="col-lg-8">
+        		{% if messages %}
+          		{% for message in messages %}
+            		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          		{% endfor %}
+        		{% endif %}
+      			<form action="{% url 'patient:login_view' %}" method="POST">{% csrf_token %}
+        			<h2 class="lead">Patient login</h2>
+        			{{ form|crispy }}
+        			<input class="btn btn-success" type="submit" value="Login">
+      			</form>
+            <p class="lead">Don't have an account? Please <a class="btn btn-primary" href="{% url 'patient:signup_view' %}">Signup</a></p>
+      		</div>
+  			<div class="col-lg-2"></div>
+    	</div>
+   </div>
+</div>
+{% endblock content %}

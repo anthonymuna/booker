@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="formato">
+	{% if user.is_authenticated %}
+	<div class="row">
+		<div class="col-lg-2">
+			<a class="btn btn-outline-success" href="{% url 'patient:view_appointments' %}">
+				<i class="fa fa-chevron-left" aria-hidden="true"></i> Back
+			</a>
+		</div>
+		<div class="col-lg-5"><h1>{{title}}</h1></div>
+		<div class="col-lg-5"></div>
+	</div>
+	<div class="container">
+		<p class="lead">Appointment: {{instance.appointment_service}} 
+			<a href="#">
+				<i class="fa fa-wrench" aria-hidden="true"></i>
+			</a>
+			<a href="#">
+				<i class="fa fa-trash"></i>
+			</a>
+		</p>
+		<p class="lead">Patient Name: {{instance.patient}}</p>
+		<p class="lead">Hospital Name: {{instance.hospital}}</p>
+		<p class="lead">Appointment Description: {{instance.appointment_description}}</p>
+		<p class="lead">Appointment Date: {{instance.appointment_date}}</p>
+		<p class="lead">Appointment Time: {{instance.appointment_time}}</p>
+	</div>
+	<a href="{% url 'patient:logout_view' %}" class="btn btn-lg btn-danger btn-block">Logout</a>
+	{% else %}
+	<div class="row">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-6"><h1>This is public page, please <a href="{% url 'patient:login_view' %}">Login</a></h1></div>
+		<div class="col-lg-3"></div>
+	</div>
+	{% endif %}
+</div>
+</div>
+{% endblock content %}

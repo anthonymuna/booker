@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+  <div class="formato">
+    {% if request.user.is_authenticated %}
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6"><h1>Welcome, You are logged in</h1></div>
+      <div class="col-lg-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <p class="lead">Step 1:</p>
+      </div>
+      <div class="col-lg-8">
+        <a class="btn btn-info" href="{% url 'doctor:create_profile' %}">Create Profile</a>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <p class="lead">Step 2:</p>
+      </div>
+      <div class="col-lg-8">
+        <a class="btn btn-info" href="{% url 'doctor:add_appointment' %}">Add Appointment</a>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <p class="lead">Step 3:</p>
+      </div>
+      <div class="col-lg-8">
+        <a class="btn btn-primary" href="#">View Appointment</a>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <br>
+    <form action="{% url 'doctor:logout_view' %}">
+      {% csrf_token %}
+      <button class="btn btn-lg btn-danger btn-block">Logout</button>
+    </form>
+    {% else %}
+    <div class="container">
+      <p class="lead">This feature is currently under development and once complete, Doctors will be able to sign up, add appointments online and also offer online consultations to patients.</p>
+      <p class="lead">For now, doctors will be notified via sms / call/ email of any appointments by patients.</p>
+      <p class="lead">Please feel free to email me your ideas or suggestions on what to include <a href="{% url 'contact' %}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+  </p>
+      <p class="lead">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </p>
+    <div class="row">
+      <div class="col-lg-3">Coming Soon</div>
+      <div class="col-lg-6"><h1>Please <a class="btn btn-primary disabled" href="{% url 'doctor:login_view' %}">Login</a> or <a class="btn btn-primary disabled" href="{% url 'doctor:signup_view' %}">Signup</a></h1></div>
+      <div class="col-lg-3"></div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
