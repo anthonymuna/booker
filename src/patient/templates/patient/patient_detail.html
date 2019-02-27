@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="formato">
+	{% if request.user.is_authenticated %}
+	<div class="row">
+		<div class="col-lg-2">
+			<a class="btn btn-outline-success" href="{% url 'patient:appointment_detail' %}">
+				<i class="fa fa-chevron-left" aria-hidden="true"></i> Back
+			</a>
+		</div>
+		<div class="col-lg-5"><h1>{{title}}</h1></div>
+		<div class="col-lg-5"></div>
+	</div>
+	<div class="container">
+		<p class="lead">Full Name: {{instance.full_name}}
+			<a href="#">
+				<i class="fa fa-wrench" aria-hidden="true"></i>
+			</a>
+			<a href="#">
+				<i class="fa fa-trash"></i>
+			</a>
+		</p>
+		<p class="lead">ID Number: {{instance.id_number}}</p>
+		<p class="lead">Location: {{instance.home}}</p>
+		<p class="lead">Mobile Number: {{instance.mobile_number}}</p>
+		<p class="lead">Nationality: {{instance.nationality}}</p>
+	</div>
+	<a href="{% url 'patient:logout_view' %}" class="btn btn-lg btn-danger btn-block">Logout</a>
+	{% else %}
+	<div class="row">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-6"><h1>This is public page, please <a href="{% url 'patient:login_view' %}">Login</a></h1></div>
+		<div class="col-lg-3"></div>
+	</div>
+	{% endif %}
+</div>
+</div>
+{% endblock content %}

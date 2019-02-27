@@ -57,26 +57,29 @@ def book_appointment(request):
 		form = AppointmentForm()
 	return render(request, 'patient/book_appointment.html', {'form':form})
 
-def view_appointments(request):
-	queryset = Appointment.objects.all()
-	return render(request, 'patient/view_appointment.html', {'query': queryset})
+def booked(request):
+	data = Appointment.objects.all()
+	queryset = data.filter(patient=request.user)
+	return render(request, 'patient/success.html', {'query': queryset})
 
 def appointment_detail(request, id=None):
 	instance = get_object_or_404(Appointment, id=id)
 	return render(request, 'patient/detail.html', {'title': 'Appointment Detail', 'instance':instance})
 
-# def patient_detail(request, id=None):
-# 	instance = get_object_or_404(Patient, id=id)
+# def patient_detail(request, user=None):
+# 	instance = get_object_or_404(Patient, user=user)
 # 	return render(request, 'patient/patient_detail.html', {'title':'Patient Information', 'instance':instance})
-	
+
 def appointment_update(request, id=None):
 	instance = get_object_or_404(Appointment, id=id)
-	form = AppointmentForm(request.POST or None)
+	form = AppointmentForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.user = request.user
 		instance = form.save()
 		return redirect('patient:view_appointments')
+	else:
+		form = AppointmentForm(instance=instance)
 	return render(request, 'patient/appointment_update.html',{'title': instance.appointment_service, 'instance':instance, 'form':form})
 
 def appointment_delete(request, id=None):

@@ -38,7 +38,6 @@ APPOINTMENT_CHOICES = (
 
 class AddAppointment(models.Model):
     appointment_service = models.CharField(max_length=250, choices=APPOINTMENT_CHOICES, default=None)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(User, on_delete=models.CASCADE)
     date_of_appointment = models.DateField()
     time_of_appointment = models.TimeField()
-    

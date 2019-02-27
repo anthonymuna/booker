@@ -12,31 +12,22 @@
       <div class="col-lg-3"></div>
     </div>
     <div class="row">
-      <div class="col-lg-2">
-        <p class="lead">Step 1:</p>
-      </div>
-      <div class="col-lg-8">
-        <a class="btn btn-info" href="{% url 'patient:create_profile' %}">Create Profile</a>
-      </div>
-      <div class="col-lg-2"></div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2">
-        <p class="lead">Step 2:</p>
-      </div>
-      <div class="col-lg-8">
-        <a class="btn btn-info" href="{% url 'patient:book_appointment' %}">Book Appointment</a>
-      </div>
-      <div class="col-lg-2"></div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2">
-        <p class="lead">Step 3:</p>
-      </div>
-      <div class="col-lg-8">
-        <a class="btn btn-primary" href="{% url 'patient:booked' %}">View Appointment</a>
-      </div>
-      <div class="col-lg-2"></div>
+      {% for appointment in query %}
+			<div class="col-md-4">
+				<p class="lead">
+					<a class="btn btn-secondary" href="{% url 'patient:appointment_detail' appointment.id %}">{{appointment.appointment_service}}</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<p class="lead">{{appointment.appointment_description}}</p>
+			</div>
+			<div class="col-md-2">
+				<p class="lead">{{appointment.appointment_date}}</p>
+			</div>
+			<div class="col-md-2">
+				<p class="lead">{{appointment.appointment_time}}</p>
+			</div>
+			{% endfor %}
     </div>
     <br>
     <form action="{% url 'patient:logout_view' %}">

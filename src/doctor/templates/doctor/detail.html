@@ -2,10 +2,10 @@
 {% block content %}
 <div class="container">
 	<div class="formato">
-	{% if user.is_authenticated %}
+	{% if request.user.is_authenticated %}
 	<div class="row">
 		<div class="col-lg-2">
-			<a class="btn btn-outline-success" href="{% url 'patient:booked' %}">
+			<a class="btn btn-outline-success" href="{% url 'doctor:view_appointments' %}">
 				<i class="fa fa-chevron-left" aria-hidden="true"></i> Back
 			</a>
 		</div>
@@ -27,11 +27,11 @@
 		<p class="lead">Appointment Date: {{instance.appointment_date}}</p>
 		<p class="lead">Appointment Time: {{instance.appointment_time}}</p>
 	</div>
-	<a href="{% url 'patient:logout_view' %}" class="btn btn-lg btn-danger btn-block">Logout</a>
+	<a href="{% url 'doctor:logout_view' %}" class="btn btn-lg btn-danger btn-block">Logout</a>
 	{% else %}
 	<div class="row">
 		<div class="col-lg-3"></div>
-		<div class="col-lg-6"><h1>This is public page, please <a href="{% url 'patient:login_view' %}">Login</a></h1></div>
+		<div class="col-lg-6"><h1>This is public page, please <a href="{% url 'doctor:login_view' %}">Login</a></h1></div>
 		<div class="col-lg-3"></div>
 	</div>
 	{% endif %}

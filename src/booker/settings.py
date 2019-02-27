@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     #my apps
     'booker',
-    # 'accounts',
     'patient',
     'doctor',
     'crispy_forms',

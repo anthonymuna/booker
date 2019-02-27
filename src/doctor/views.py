@@ -3,10 +3,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from doctor.Doctor_info import DoctorForm, AddAppointmentForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from patient.models import Appointment
 
 def index(request):
     return render(request, 'doctor/index.html', {})
-    
+
 def signup_view(request):
 	if request.method == 'POST':
 		form = UserCreationForm(request.POST)
@@ -32,7 +33,7 @@ def login_view(request):
 	else:
 		form = AuthenticationForm()
 	return render(request, 'doctor/login.html', {'form':form})
-		
+
 def create_profile(request):
 	form = DoctorForm(request.POST or None)
 	if form.is_valid():
@@ -56,14 +57,16 @@ def add_appointment(request):
 	return render(request, 'doctor/add_appointment.html', {'form':form})
 
 # def list_appointments(request):
-# 	queryset 
+# 	queryset
 # 	return render(request, 'doctor/list_appointments.html', {})
 
 def view_appointment(request):
-    return render(request, 'doctor/view_appointment.html', {})
+    queryset = Appointment.objects.all()
+    return render(request, 'doctor/view_appointment.html', {'query': queryset})
 
-def appointment_detail(request):
-	return render(request, 'doctor/appointment_detail', {})
+def appointment_detail(request, id=None):
+	instance = get_object_or_404(Appointment, id=id)
+	return render(request, 'is_doctor/detail.html', {'title': 'Appointment Detail', 'instance':instance})
 
 # def update_appointment(request):
 # 	return render(request, 'doctor/update_appointment.html', {})

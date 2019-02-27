@@ -25,7 +25,7 @@ INSURANCE_CHOICES = (
 
 class Patient(models.Model):
 	user = models.OneToOneField(User)
-	slug = models.SlugField(unique=True)
+	#slug = models.SlugField(unique=True)
 	full_name = models.CharField(max_length=500, blank=False)
 	thumb = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 	nationality = models.CharField(max_length=155, blank=False)
