@@ -88,27 +88,12 @@ WSGI_APPLICATION = 'booker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# [START db_setup]
-if os.getenv('GAE_APPLICATION', None):
-    # Running on production App Engine, so connect to Google Cloud SQL using
-    # the unix socket at /cloudsql/<your-cloudsql-connection string>
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'booker',
-            'USER': 'bookeruser',
-            'PASSWORD': 'form3south',
-            'HOST': '/cloudsql/booker-233017:asia-southeast1:booker',
-            'PORT': '',
-        }
-    }
 
-else:
     # Running locally so connect to either a local MySQL instance or connect
     # to Cloud SQL via the proxy.  To start the proxy via command line:
     #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-    DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'booker',
@@ -118,7 +103,6 @@ else:
         'PORT': '',
     }
 }
-# [END db_setup]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
